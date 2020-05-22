@@ -3,7 +3,17 @@
         <div class="row">
             <div class="col-md-12 group-col">
                 <h3>Recent Post Sent to Buffer</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <form action="<?php echo e(Request::url()); ?>" method = "GET">
+                            <input type="text" name="search" id="#search">
+                            <input class="datepicker" data-date-format="mm/dd/yyyy" name="sent_at">
+                        </form>
+                    </div>
+                </div>
+                
                 <div class="panel panel-default">
+                    
                     <table style="width:100%">
                         <tr>
                           <th>Group Name</th>
@@ -32,5 +42,30 @@
     </div>
 
 <?php $__env->stopSection(); ?>
-
+<script>
+    $('.datepicker').datepicker();
+$('#filterbtn').click(function(e){
+    e.preventDefault();
+    if($('#search-form').length){
+        var param = $('#search-form').ktdtSerializeObject();
+        var start = param.inetload_time_start;
+        var end = param.inetload_time_end;
+        if( start != '' ||  end != ''){
+            if(start == ''){
+                start = moment(end, 'YYYY-MM-DD').subtract(1, 'days').format('YYYY-MM-DD');
+            }
+            if(end == ''){
+                end = moment().format('YYYY-MM-DD');
+            }
+            var starttime = moment(start+' 00:00:00').valueOf()/1000;
+            var endtime = moment(end+' 23:59:59').valueOf()/1000;
+            var time = starttime+'_'+endtime+'_payment';
+            param.time = time;
+            delete param['inetload_time_start'];
+            delete param['inetload_time_end'];
+        }
+        paidsummary_table.search(param, 'params');
+    }
+});
+</script>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

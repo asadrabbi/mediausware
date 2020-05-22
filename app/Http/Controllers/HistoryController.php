@@ -27,7 +27,10 @@ class HistoryController extends Controller
         $history = new BufferPosting;
         $history = $history->with('accountInfo')->with('groupInfo');
         $history = $history->paginate(15,['*'],'null',$request->page);
-        //if($request->has(''))
+        /*if($request->has('search')){
+            $history = $history->where('post_text',$request->get('search'));
+        }
+        */
         return view('group.history', ['history' => $history]);
     }
 }

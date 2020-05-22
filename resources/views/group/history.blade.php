@@ -4,11 +4,18 @@
         <div class="row">
             <div class="col-md-12 group-col">
                 <h3>Recent Post Sent to Buffer</h3>
-                <div class="panel panel-default">
-                    <!--
-                        <form action="" method = "GET">
+                <!--
+                <div class="card">
+                    <div class="card-body">
+                        <form action="{{Request::url()}}" method = "GET">
+                            <input type="text" name="search" id="#search">
+                            <input class="datepicker" data-date-format="mm/dd/yyyy" name="sent_at">
                         </form>
-                    -->
+                    </div>
+                </div>
+                -->
+                <div class="panel panel-default">
+                    
                     <table style="width:100%">
                         <tr>
                           <th>Group Name</th>
