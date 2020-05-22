@@ -3,6 +3,8 @@
 namespace Bulkly;
 
 use Illuminate\Database\Eloquent\Model;
+use Bulkly\SocialAccounts;
+use Bulkly\SocialPostGroups;
 
 class BufferPosting extends Model
 {
